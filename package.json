@@ -1,0 +1,25 @@
+{
+  "name": "generator-plumejs",
+  "version": "1.0.0",
+  "description": "yeoman generator for plumejs",
+  "main": "index.js",
+  "files": [
+    "app"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KiranMantha/generator-plumejs.git"
+  },
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "author": "kiranv.mantha@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KiranMantha/generator-plumejs/issues"
+  },
+  "homepage": "https://github.com/KiranMantha/generator-plumejs#readme"
+}
