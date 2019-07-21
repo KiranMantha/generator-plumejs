@@ -2,9 +2,9 @@
   "name": "generator-plumejs",
   "version": "1.0.0",
   "description": "yeoman generator for plumejs",
-  "main": "index.js",
+  "main": "app/index.js",
   "files": [
-    "app"
+    "generators"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -21,5 +21,12 @@
   "bugs": {
     "url": "https://github.com/KiranMantha/generator-plumejs/issues"
   },
-  "homepage": "https://github.com/KiranMantha/generator-plumejs#readme"
+  "homepage": "https://github.com/KiranMantha/generator-plumejs#readme",
+  "dependencies": {
+    "yeoman-generator": "^4.0.1"
+  },
+  "devDependencies": {
+    "chalk": "^2.4.2",
+    "yosay": "^2.0.2"
+  }
 }

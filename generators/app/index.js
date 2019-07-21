@@ -2,13 +2,14 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
+const mkdirp = require('mkdirp');
 
 module.exports = class extends Generator {
-  prompting() {
+  async prompting() {
     // Have Yeoman greet the user.
     this.log(
       yosay(`Welcome to the super-excellent ${chalk.red('generator-plumejs')} generator!`)
-    );
+    );    
 
     const prompts = [
       {
@@ -25,13 +26,12 @@ module.exports = class extends Generator {
       }
     ];
 
-    return this.prompt(prompts).then(props => {
-      // To access props later use this.props.someAnswer;
-      this.props = props;
-    });
+    this.answers = await this.prompt(prompts);
   }
 
   writing() {
+    mkdirp.sync(this.answers.name);
+    this.destinationRoot(this.answers.name);
     this.fs.copy(
       this.templatePath('_src/_index.html'),
       this.destinationPath('src/index.html')
@@ -59,10 +59,10 @@ module.exports = class extends Generator {
 
     this.fs.copyTpl(
       this.templatePath('_package.json'),
-      this.destinationPath('package.json', {
-        name: this.props.name,
-        description: this.props.description
-      })
+      this.destinationPath('package.json'), {
+        name: this.answers.name,
+        description: this.answers.description
+      }
     );
 
     this.fs.copy(
@@ -77,6 +77,9 @@ module.exports = class extends Generator {
   }
 
   install() {
-    this.installDependencies();
+    this.installDependencies({
+      bower: false,
+      npm: true
+    });
   }
 };
