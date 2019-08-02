@@ -1,6 +1,7 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const TerserPlugin = require('terser-webpack-plugin');
 const path = require('path');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
     mode: 'development',
@@ -17,12 +18,17 @@ module.exports = {
             use: {
                 loader: "babel-loader"
             }
+        }, {
+            test: /\.(s*)css$/,
+            exclude: /node_modules/,
+            use: ["css-loader", "sass-loader"]
         }]
     },
     resolve: {
-        extensions: ['.ts', '.js']
+        extensions: ['.js', '.ts', '.scss', '.css']
     },
     plugins: [
+        new CleanWebpackPlugin(),
         new HtmlWebPackPlugin({
             template: "./src/index.html",
             filename: "./index.html",
