@@ -3,12 +3,16 @@ const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
 const mkdirp = require('mkdirp');
+const figlet = require('figlet');
 
 module.exports = class extends Generator {
   async prompting() {
     // Have Yeoman greet the user.
+    this.log(chalk.yellow(
+      figlet.textSync('PlumeJS', { horizontalLayout: 'full' })
+    ));
     this.log(
-      yosay(`Welcome to the super-excellent ${chalk.red('generator-plumejs')} generator!`)
+      yosay(`Welcome to the super-excellent ${chalk.red('plumejs')} generator!`)
     );    
 
     const prompts = [

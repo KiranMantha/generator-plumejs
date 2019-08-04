@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "chalk": "^2.4.2",
+    "figlet": "^1.2.3",
     "yosay": "^2.0.2"
   }
 }
