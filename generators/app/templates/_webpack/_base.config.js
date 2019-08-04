@@ -10,6 +10,9 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].[hash].js'
     },
+    resolve: {
+        extensions: ['.ts', '.js', '.scss', '.css']
+    },
     module: {
         rules: [{
             test: /\.ts$/,
@@ -17,10 +20,11 @@ module.exports = {
             use: {
                 loader: "babel-loader"
             }
+        }, {
+            test: /\.(s*)css$/,
+            exclude: /node_modules/,
+            use: ['css-loader', 'sass-loader']
         }]
-    },
-    resolve: {
-        extensions: ['.ts', '.js']
     },
     plugins: [
         new HtmlWebPackPlugin({

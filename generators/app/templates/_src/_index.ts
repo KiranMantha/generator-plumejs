@@ -1,12 +1,16 @@
 import { Component, html } from 'plumejs';
 
+const rootstyles = require('./styles.scss');
+
 @Component({
-    selector: 'app-root'
+    selector: 'app-root',
+    root:true,
+    styles: rootstyles
 })
-export class TodoList {
+export class AppComponent {
     render() {
         return html`
-            <h1>Hello world</h1>
+            <h1 class='title'>Hello world</h1>
         `
     }
 }
