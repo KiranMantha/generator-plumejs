@@ -4,8 +4,8 @@ const rootstyles = require('./styles.scss');
 
 @Component({
     selector: 'app-root',
-    root:true,
-    styles: rootstyles
+    styles: rootstyles,
+    root: true
 })
 export class AppComponent {
     render() {

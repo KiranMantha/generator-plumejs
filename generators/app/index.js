@@ -43,6 +43,11 @@ module.exports = class extends Generator {
     );
 
     this.fs.copy(
+      this.templatePath('_src/_styles.scss'),
+      this.destinationPath('src/styles.scss')
+    );
+
+    this.fs.copy(
       this.templatePath('_webpack/_base.config.js'),
       this.destinationPath('webpack/base.config.js')
     );
