@@ -8,7 +8,7 @@ module.exports = {
     devtool: 'cheap-module-source-map',
     entry: './src/index.ts',
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, '../dist'),
         filename: '[name].[hash].js'
     },
     module: {
