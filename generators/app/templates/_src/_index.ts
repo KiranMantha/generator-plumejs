@@ -19,6 +19,7 @@ export class AppComponent {
   render() {
     return html`
       <h1 class="title">Hello world</h1>
+      ${ 'user.name'.translate({name: 'test user'}) }
     `;
   }
 }
