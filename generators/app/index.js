@@ -37,18 +37,18 @@ module.exports = class extends Generator {
     mkdirp.sync(this.answers.name);
     this.destinationRoot(this.answers.name);
     this.fs.copy(
-      this.templatePath('_src/_index.html'),
-      this.destinationPath('src/index.html')
+      this.templatePath('_src/_app/_index.html'),
+      this.destinationPath('src/app/index.html')
     );
 
     this.fs.copy(
-      this.templatePath('_src/_index.ts'),
-      this.destinationPath('src/index.ts')
+      this.templatePath('_src/_app/_index.ts'),
+      this.destinationPath('src/app/index.ts')
     );
 
     this.fs.copy(
-      this.templatePath('_src/_styles.scss'),
-      this.destinationPath('src/styles.scss')
+      this.templatePath('_src/_app/_styles.scss'),
+      this.destinationPath('src/app/styles.scss')
     );
 
     this.fs.copy(

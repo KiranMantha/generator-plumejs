@@ -6,7 +6,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
     mode: 'development',
     devtool: 'cheap-module-source-map',
-    entry: './src/index.ts',
+    entry: './src/app/index.ts',
     output: {
         path: path.resolve(__dirname, '../dist'),
         filename: '[name].[hash].js'
@@ -30,7 +30,7 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebPackPlugin({
-            template: "./src/index.html",
+            template: "./src/app/index.html",
             filename: "./index.html",
             inject: "head"
         })
