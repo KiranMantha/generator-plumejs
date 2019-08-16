@@ -17,8 +17,8 @@ export class AppComponent {
 
     render() {
         return html`
-            <h1 class='title'>Hello world</h1>
-            <span>${ 'username.greet'.translate({name: 'hello world'}) }</span>
+        <span>${ 'username.greet'.translate({name: 'hello world'}) }</span>    
+        <h1 class='title'>Hello world</h1>            
         `
     }
 }
