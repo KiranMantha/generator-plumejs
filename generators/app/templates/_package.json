@@ -8,7 +8,7 @@
     "build": "webpack  --config webpack/build.config.js",
     "build:multi": "webpack --env.build=multi --config webpack/build.config.js"
   },
-  "main": "./src/index.ts",
+  "main": "./src/app/index.ts",
   "author": "",
   "license": "ISC",
   "dependencies": {    
