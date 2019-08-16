@@ -1,41 +1,55 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const TerserPlugin = require('terser-webpack-plugin');
 const path = require('path');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-    mode: 'development',
     devtool: 'cheap-module-source-map',
-    entry: './src/index.ts',
+    entry: {
+        main: './src/index.ts'
+    },
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, '../dist'),
         filename: '[name].[hash].js'
+    },
+    resolve: {
+        alias: {
+            src: path.resolve(__dirname, '../src')
+        },
+        extensions: ['.ts', '.js', '.scss', '.css']
     },
     module: {
         rules: [{
-            test: /\.ts$/,
+            test: /.ts$/,
             exclude: /node_modules/,
-            use: {
-                loader: "babel-loader"
-            }
+            use: [{
+                loader: 'babel-loader',
+                options: {
+                  babelrc: true
+                }
+            },{
+                loader: 'ts-loader',
+                options: {
+                  transpileOnly: true,
+                  configFile: 'tsconfig.json',
+                }
+            }]
         }, {
             test: /\.(s*)css$/,
-            exclude: /node_modules/,
             use: ["css-loader", "sass-loader"]
         }]
     },
-    resolve: {
-        extensions: ['.js', '.ts', '.scss', '.css']
-    },
     plugins: [
-        new CleanWebpackPlugin(),
         new HtmlWebPackPlugin({
             template: "./src/index.html",
             filename: "./index.html",
-            inject: "head"
+            inject: "head",
+            minify: {
+                collapseWhitespace: false
+            }
         })
     ],
     optimization: {
+        runtimeChunk: true,
         minimizer: [
             new TerserPlugin({
                 terserOptions: {
@@ -45,8 +59,7 @@ module.exports = {
             })
         ],
         splitChunks: {
-            chunks: 'all',
-            name: 'vendor'
+            chunks: 'all'
         }
     }
 };

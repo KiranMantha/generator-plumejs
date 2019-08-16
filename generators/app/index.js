@@ -52,6 +52,41 @@ module.exports = class extends Generator {
     );
 
     this.fs.copy(
+      this.templatePath('_src/_i18n/_en.ts'),
+      this.destinationPath('src/i18n/en.ts')
+    );
+
+    this.fs.copy(
+      this.templatePath('_src/_i18n/_fr.ts'),
+      this.destinationPath('src/i18n/fr.ts')
+    );
+
+    this.fs.copy(
+      this.templatePath('_@types/augmentor/index.d.ts'),
+      this.templatePath('@types/augmentor/index.d.ts'),
+    );
+
+    this.fs.copy(
+      this.templatePath('_@types/melanke-watchjs/index.d.ts'),
+      this.templatePath('@types/melanke-watchjs/index.d.ts'),
+    );
+
+    this.fs.copy(
+      this.templatePath('_@types/vanilla-i18n/index.d.ts'),
+      this.templatePath('@types/vanilla-i18n/index.d.ts'),
+    );
+
+    this.fs.copy(
+      this.templatePath('_webpack/_base.config.js'),
+      this.destinationPath('webpack/base.config.js')
+    );
+
+    this.fs.copy(
+      this.templatePath('_webpack/_base.config.js'),
+      this.destinationPath('webpack/base.config.js')
+    );
+
+    this.fs.copy(
       this.templatePath('_webpack/_base.config.js'),
       this.destinationPath('webpack/base.config.js')
     );
@@ -82,6 +117,11 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath('_tsconfig.json'),
       this.destinationPath('tsconfig.json')
+    );
+
+    this.fs.copy(
+      this.templatePath('es.d.ts'),
+      this.templatePath('es.d.ts'),
     );
   }
 

@@ -1,16 +1,24 @@
-import { Component, html } from 'plumejs';
+import { Component, html, TranslationService } from 'plumejs';
 
-const rootstyles = require('./styles.scss');
+import en from './i18n/en';
+import fr from './i18n/fr';
 
 @Component({
     selector: 'app-root',
-    styles: rootstyles,
+    styles: 'main.scss',
     root: true
 })
 export class AppComponent {
+    constructor(translations:TranslationService){
+        translations.setTranslate(en, 'en');
+        translations.setTranslate(fr, 'fr');
+        translations.setDefaultLanguage('en');
+    }
+
     render() {
         return html`
             <h1 class='title'>Hello world</h1>
+            <span innerHTML='${ 'username.greet'.translate({name: 'hello world'}) }'></span>
         `
     }
 }
