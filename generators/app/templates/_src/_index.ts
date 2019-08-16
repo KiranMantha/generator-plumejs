@@ -5,7 +5,7 @@ import fr from './i18n/fr';
 
 @Component({
     selector: 'app-root',
-    styles: 'main.scss',
+    styles: 'styles.scss',
     root: true
 })
 export class AppComponent {
@@ -18,7 +18,7 @@ export class AppComponent {
     render() {
         return html`
             <h1 class='title'>Hello world</h1>
-            <span innerHTML='${ 'username.greet'.translate({name: 'hello world'}) }'></span>
+            <span>${ 'username.greet'.translate({name: 'hello world'}) }</span>
         `
     }
 }

@@ -77,6 +77,11 @@ module.exports = class extends Generator {
     );
 
     this.fs.copy(
+      this.templatePath('_@types/_es.d.ts'),
+      this.destinationPath('@types/es.d.ts'),
+    );
+
+    this.fs.copy(
       this.templatePath('_webpack/_base.config.js'),
       this.destinationPath('webpack/base.config.js')
     );
@@ -117,11 +122,6 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath('_tsconfig.json'),
       this.destinationPath('tsconfig.json')
-    );
-
-    this.fs.copy(
-      this.templatePath('_es.d.ts'),
-      this.destinationPath('es.d.ts'),
     );
   }
 
