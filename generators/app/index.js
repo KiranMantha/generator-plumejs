@@ -63,17 +63,17 @@ module.exports = class extends Generator {
 
     this.fs.copy(
       this.templatePath('_@types/_augmentor/_index.d.ts'),
-      this.templatePath('@types/augmentor/index.d.ts'),
+      this.destinationPath('@types/augmentor/index.d.ts'),
     );
 
     this.fs.copy(
       this.templatePath('_@types/_melanke-watchjs/_index.d.ts'),
-      this.templatePath('@types/melanke-watchjs/index.d.ts'),
+      this.destinationPath('@types/melanke-watchjs/index.d.ts'),
     );
 
     this.fs.copy(
       this.templatePath('_@types/_vanilla-i18n/_index.d.ts'),
-      this.templatePath('@types/vanilla-i18n/index.d.ts'),
+      this.destinationPath('@types/vanilla-i18n/index.d.ts'),
     );
 
     this.fs.copy(
@@ -121,7 +121,7 @@ module.exports = class extends Generator {
 
     this.fs.copy(
       this.templatePath('_es.d.ts'),
-      this.templatePath('es.d.ts'),
+      this.destinationPath('es.d.ts'),
     );
   }
 
