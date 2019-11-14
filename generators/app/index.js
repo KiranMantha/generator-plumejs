@@ -133,11 +133,6 @@ module.exports = class extends Generator {
       this.templatePath('_tsconfig.json'),
       this.destinationPath('tsconfig.json')
     );
-
-    this.fs.copy(
-      this.templatePath('_es.d.ts'),
-      this.destinationPath('es.d.ts')
-    );
   }
 
   install() {
