@@ -87,8 +87,8 @@ module.exports = class extends Generator {
     );
 
     this.fs.copy(
-      this.templatePath('_@types/_es.d.ts'),
-      this.destinationPath('@types/es.d.ts'),
+      this.templatePath('_@types/_typings.d.ts'),
+      this.destinationPath('@types/typings.d.ts'),
     );
 
     this.fs.copy(
