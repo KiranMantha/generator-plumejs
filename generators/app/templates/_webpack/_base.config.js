@@ -43,7 +43,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebPackPlugin({
-            template: "./src/app/index.html",
+            template: "./src/index.html",
             filename: "./index.html",
             inject: "head",
             minify: {
