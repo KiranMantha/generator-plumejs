@@ -120,6 +120,11 @@ module.exports = class extends Generator {
     );
 
     this.fs.copy(
+      this.templatePath('_gitignore'),
+      this.destinationPath('.gitignore')
+    );
+
+    this.fs.copy(
       this.templatePath('_tsconfig.json'),
       this.destinationPath('tsconfig.json')
     );
