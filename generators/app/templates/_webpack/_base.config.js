@@ -1,6 +1,8 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const TerserPlugin = require('terser-webpack-plugin');
 const path = require('path');
+const ManifestPlugin = require('webpack-manifest-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
     devtool: 'cheap-module-source-map',
@@ -29,16 +31,13 @@ module.exports = {
                 options: {
                   babelrc: true
                 }
-            },{
-                loader: 'ts-loader',
-                options: {
-                  transpileOnly: true,
-                  configFile: 'tsconfig.json',
-                }
             }]
         }, {
             test: /\.(s*)css$/,
             use: ["css-loader", "sass-loader"]
+        },{
+            test: /\.(png|svg|jpg|gif|woff|woff2|eot|ttf|otf)$/,
+            use: ['file-loader'],
         }]
     },
     plugins: [
@@ -49,7 +48,9 @@ module.exports = {
             minify: {
                 collapseWhitespace: false
             }
-        })
+        }),
+        new ManifestPlugin(),
+        new CleanWebpackPlugin()
     ],
     optimization: {
         runtimeChunk: true,
