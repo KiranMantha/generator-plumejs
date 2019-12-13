@@ -67,11 +67,6 @@ module.exports = class extends Generator {
     );
 
     this.fs.copy(
-      this.templatePath('_@types/_melanke-watchjs/_index.d.ts'),
-      this.destinationPath('@types/melanke-watchjs/index.d.ts'),
-    );
-
-    this.fs.copy(
       this.templatePath('_@types/_vanilla-i18n/_index.d.ts'),
       this.destinationPath('@types/vanilla-i18n/index.d.ts'),
     );
