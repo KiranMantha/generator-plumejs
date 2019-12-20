@@ -47,6 +47,11 @@ module.exports = class extends Generator {
     );
 
     this.fs.copy(
+      this.templatePath('_src/_index.spec.ts'),
+      this.destinationPath('src/index.spec.ts')
+    );
+
+    this.fs.copy(
       this.templatePath('_src/_styles.scss'),
       this.destinationPath('src/styles.scss')
     );
@@ -74,6 +79,11 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath('_@types/_typings.d.ts'),
       this.destinationPath('@types/typings.d.ts'),
+    );
+
+    this.fs.copy(
+      this.templatePath('_config/_tsconfig.test.json'),
+      this.destinationPath('config/tsconfig.test.json'),
     );
 
     this.fs.copy(
@@ -122,6 +132,21 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath('_tsconfig.json'),
       this.destinationPath('tsconfig.json')
+    );
+
+    this.fs.copy(
+      this.templatePath('_README.md'),
+      this.destinationPath('README.md')
+    );
+
+    this.fs.copy(
+      this.templatePath('_jest.config.js'),
+      this.destinationPath('jest.config.js')
+    );
+
+    this.fs.copy(
+      this.templatePath('_jest.setup.js'),
+      this.destinationPath('jest.setup.js')
     );
   }
 

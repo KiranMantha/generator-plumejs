@@ -3,20 +3,27 @@ const TerserPlugin = require('terser-webpack-plugin');
 const path = require('path');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const appconstants = {
+    publicPath: '/',
+    root: '../',
+    sourceDir: '../src',
+    buildDir: '../dist',
+    node_modules: '../node_modules'
+}
 
 module.exports = {
     devtool: 'cheap-module-source-map',
     entry: {
-        main: './src/index.ts'
+        main: './src/index.ts',
+        styles: './src/main.scss'
     },
     output: {
-        path: path.resolve(__dirname, '../dist'),
-        filename: '[name].js'
+        path: path.resolve(__dirname, appconstants.buildDir),
+        publicPath: appconstants.publicPath,
+        filename: '[name]-[hash:6].js'
     },
     resolve: {
-        alias: {
-            src: path.resolve(__dirname, '../src')
-        },
+        modules: [path.resolve(__dirname, appconstants.root), path.resolve(__dirname, appconstants.node_modules)],
         extensions: ['.ts', '.js', '.scss', '.css']
     },
     module: {
@@ -42,7 +49,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebPackPlugin({
-            template: "./src/index.html",
+            template: path.resolve(__dirname, appconstants.sourceDir + "/index.html"),
             filename: "./index.html",
             inject: "head",
             minify: {
@@ -53,6 +60,7 @@ module.exports = {
         new CleanWebpackPlugin()
     ],
     optimization: {
+        usedExports: true,
         runtimeChunk: true,
         minimizer: [
             new TerserPlugin({
@@ -63,7 +71,15 @@ module.exports = {
             })
         ],
         splitChunks: {
-            chunks: 'all'
+            chunks: 'all',
+            automaticNameDelimiter: '-',
+            cacheGroups: {
+                vendors: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendor',
+                    chunks: 'all'
+                }
+            }
         }
     }
 };
