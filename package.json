@@ -23,9 +23,7 @@
   },
   "homepage": "https://github.com/KiranMantha/generator-plumejs#readme",
   "dependencies": {
-    "yeoman-generator": "^4.0.1"
-  },
-  "devDependencies": {
+    "yeoman-generator": "^4.0.1",
     "chalk": "^2.4.2",
     "figlet": "^1.2.3",
     "yosay": "^2.0.2"
