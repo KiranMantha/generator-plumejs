@@ -13,10 +13,11 @@ module.exports = {
   coverageDirectory: '<rootDir>/coverage',
   collectCoverageFrom: [
     "**/src/**",
+    "!**/src/**/*.scss",
     "!**/dist/**",
     "!**/node_modules/**"
   ],
-  testRegex: '(/src/.*|(\\.|/)(test|spec))\\.[t]sx?$',
+  testRegex: '(/src/.*(\\.|/)(test|spec))\\.[t]s?$',
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'json'],
   moduleNameMapper: {
     '^@src/(.*)$': '<rootDir>/src/$1',
