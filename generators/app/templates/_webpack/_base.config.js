@@ -15,7 +15,7 @@ module.exports = {
     devtool: 'cheap-module-source-map',
     entry: {
         main: './src/index.ts',
-        styles: './src/main.scss'
+        styles: './src/styles.scss'
     },
     output: {
         path: path.resolve(__dirname, appconstants.buildDir),
@@ -31,7 +31,7 @@ module.exports = {
             test: /\.html$/,
             use: ['html-loader']
           },{
-            test: /.ts$/,
+            test: /\.ts$/,
             exclude: /node_modules/,
             use: [{
                 loader: 'babel-loader',
