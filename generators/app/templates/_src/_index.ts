@@ -1,4 +1,4 @@
-import { Component, html, TranslationService } from "plumejs";
+import { Component, html, TranslationService, Router } from "plumejs";
 import locale_en from './i18n/en';
 import locale_fr from './i18n/fr';
 
@@ -8,7 +8,7 @@ import locale_fr from './i18n/fr';
   root: true
 })
 export class AppComponent {
-  constructor(translations: TranslationService) {
+  constructor(router:Router, translations:TranslationService) {
     translations.setTranslate(locale_en, "en");
     translations.setTranslate(locale_fr, "fr");
     translations.setDefaultLanguage("en");
@@ -16,7 +16,7 @@ export class AppComponent {
   render() {
     return html`
       <h1 class="title">Hello world</h1>
-      ${ 'user.name'.translate({name: 'test user'}) }
+      <div>${ 'username.greet'.translate({name: 'test user'}) }</div>
     `;
   }
 }

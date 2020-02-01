@@ -44,7 +44,7 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath('_src/_index.ts'),
       this.destinationPath('src/index.ts')
-    );
+    );    
 
     this.fs.copy(
       this.templatePath('_src/_styles.scss'),
@@ -67,6 +67,11 @@ module.exports = class extends Generator {
     );
 
     this.fs.copy(
+      this.templatePath('_@types/_browser-or-node/_index.d.ts'),
+      this.destinationPath('@types/browser-or-node/index.d.ts'),
+    );
+
+    this.fs.copy(
       this.templatePath('_@types/_vanilla-i18n/_index.d.ts'),
       this.destinationPath('@types/vanilla-i18n/index.d.ts'),
     );
@@ -74,6 +79,16 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath('_@types/_typings.d.ts'),
       this.destinationPath('@types/typings.d.ts'),
+    );
+
+    this.fs.copy(
+      this.templatePath('__tests__/_index.spec.ts'),
+      this.destinationPath('__tests__/index.spec.ts')
+    );
+
+    this.fs.copy(
+      this.templatePath('_config/_tsconfig.test.json'),
+      this.destinationPath('config/tsconfig.test.json'),
     );
 
     this.fs.copy(
@@ -122,6 +137,21 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath('_tsconfig.json'),
       this.destinationPath('tsconfig.json')
+    );
+
+    this.fs.copy(
+      this.templatePath('_README.md'),
+      this.destinationPath('README.md')
+    );
+
+    this.fs.copy(
+      this.templatePath('_jest.config.js'),
+      this.destinationPath('jest.config.js')
+    );
+
+    this.fs.copy(
+      this.templatePath('_config/_jest.setup.js'),
+      this.destinationPath('config/jest.setup.js')
     );
   }
 
