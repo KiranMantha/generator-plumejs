@@ -1,6 +1,6 @@
 {
   "name": "generator-plumejs",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "yeoman generator for plumejs",
   "main": "app/index.js",
   "files": [
