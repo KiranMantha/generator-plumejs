@@ -25,9 +25,6 @@ window.HTMLElement.prototype.trigger = function (eventName, isBubbleing) {
   });
   this.dispatchEvent(event);
 };
-/**
- * end of defaults
- */
 
 Object.assign(global, {
   document: window.document,
@@ -37,6 +34,10 @@ Object.assign(global, {
   CSSStyleSheet: _CSSStyleSheet,
   fetch: _fetch
 });
+
+/**
+ * end of defaults
+ */
 
 function createXHRmock() {
   var open, send, status, onloadend, setRequestHeader, response, responseText;

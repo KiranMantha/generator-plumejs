@@ -10,16 +10,13 @@ module.exports = {
   collectCoverageFrom: [
     "**/src/**/*.ts"
   ],
-  testRegex: '(/__tests__/.*(\\.|/)(test|spec))\\.ts?$',
-  moduleFileExtensions: ['js', 'jsx', 'ts', 'scss'],
-  moduleNameMapper: {
-    '^@src/(.*)$': '<rootDir>/src/$1'
-  },
+  testRegex: '(/__tests__/.*(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
+  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
   transformIgnorePatterns: ['<rootDir>/node_modules/'],
   globals: {
     'ts-jest': {
       diagnostics: false,
-      tsConfig: '<rootDir>/config/tsconfig.test.json'
+      tsConfig: '<rootDir>/tsconfig.json'
     }
   }
   //testNamePattern: "component"

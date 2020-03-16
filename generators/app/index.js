@@ -44,7 +44,22 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath('_src/_index.ts'),
       this.destinationPath('src/index.ts')
-    );    
+    );  
+    
+    this.fs.copy(
+      this.templatePath('_src/_sample-ele.ts'),
+      this.destinationPath('src/sample-ele.ts')
+    );
+
+    this.fs.copy(
+      this.templatePath('_src/_persons/_persons-list.ts'),
+      this.destinationPath('src/persons/persons-list.ts')
+    );
+
+    this.fs.copy(
+      this.templatePath('_src/_persons/_persons-list.scss'),
+      this.destinationPath('src/persons/persons-list.scss')
+    );
 
     this.fs.copy(
       this.templatePath('_src/_styles.scss'),
@@ -87,23 +102,13 @@ module.exports = class extends Generator {
     );
 
     this.fs.copy(
-      this.templatePath('_config/_tsconfig.test.json'),
-      this.destinationPath('config/tsconfig.test.json'),
-    );
-
-    this.fs.copy(
       this.templatePath('_webpack/_base.config.js'),
       this.destinationPath('webpack/base.config.js')
     );
 
     this.fs.copy(
-      this.templatePath('_webpack/_base.config.js'),
-      this.destinationPath('webpack/base.config.js')
-    );
-
-    this.fs.copy(
-      this.templatePath('_webpack/_base.config.js'),
-      this.destinationPath('webpack/base.config.js')
+      this.templatePath('_webpack/_custom-scss-loader.js'),
+      this.destinationPath('webpack/custom-scss-loader.js')
     );
 
     this.fs.copy(
@@ -122,11 +127,6 @@ module.exports = class extends Generator {
         name: this.answers.name,
         description: this.answers.description
       }
-    );
-
-    this.fs.copy(
-      this.templatePath('_babelrc'),
-      this.destinationPath('.babelrc')
     );
 
     this.fs.copy(
