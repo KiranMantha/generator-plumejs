@@ -10,6 +10,7 @@ const appconstants = {
     node_modules: '../node_modules'
 }
 const webpack = require('webpack');
+const TerserPlugin = require('terser-webpack-plugin');
 const fromDir = require('./custom-scss-loader');
 const scssMap = fromDir(path.resolve(__dirname, appconstants.sourceDir), '.scss');
 
@@ -75,6 +76,14 @@ module.exports = {
         })
     ],
     optimization: {
+        minimizer: [
+            new TerserPlugin({
+                terserOptions: {
+                    keep_classnames: true,
+                    keep_fnames: true
+                }
+            })
+        ],
         splitChunks: {
             chunks: 'all',
             automaticNameDelimiter: '-',
