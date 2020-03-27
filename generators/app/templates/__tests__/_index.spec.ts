@@ -1,4 +1,4 @@
-import { TestBed } from 'plumejs/TestBed';
+import { TestBed } from 'plumejs';
 import { AppComponent } from '../src/index';
 
 describe("Plumejs Component", () => {
