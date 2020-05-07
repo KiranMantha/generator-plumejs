@@ -9,14 +9,12 @@ const appconstants = {
     buildDir: '../dist',
     node_modules: '../node_modules'
 }
-const webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
-const fromDir = require('./custom-scss-loader');
-const scssMap = fromDir(path.resolve(__dirname, appconstants.sourceDir), '.scss');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     devtool: 'cheap-module-source-map',
-    entry: './src/index.ts',
+    entry: ['./src/index.ts', './src/polyfills.ts'],
     output: {
         path: path.resolve(__dirname, appconstants.buildDir),
         publicPath: appconstants.publicPath,
@@ -40,6 +38,9 @@ module.exports = {
                     }
                 }]
             }, {
+                test: /\.(s*)css$/,
+                use: ['css-loader', 'sass-loader']
+            }, {
                 test: /\.(png|svg|jpg|gif|woff|woff2|eot|ttf|otf)$/,
                 use: [{
                     loader: 'file-loader',
@@ -61,7 +62,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebPackPlugin({
-            template: path.resolve(__dirname, appconstants.sourceDir + "/index.html"),
+            template: "./src/index.html",
             filename: "./index.html",
             inject: "head",
             minify: {
@@ -71,9 +72,9 @@ module.exports = {
         new WebpackPrebuild(() => {
             del([path.resolve(__dirname, appconstants.buildDir)])
         }),
-        new webpack.DefinePlugin({
-            "process.env.COMPILEDCSSOBJ": JSON.stringify(scssMap)
-        })
+        new CopyWebpackPlugin([
+            {from:'src/images',to:'images'}
+        ])
     ],
     optimization: {
         minimizer: [
