@@ -1,5 +1,6 @@
 import { Component, Input, html, Injectable, Router } from "plumejs";
-import personsStyles from './persons-list.scss'
+import personsListStyles from './persons-list.scss';
+
 
 @Injectable()
 class PersonService {
@@ -12,7 +13,7 @@ class PersonService {
 
 @Component({
 	selector: "persons-list",
-	styles: personsStyles
+	styles: personsListStyles
 })
 class PersonsList {
 	data: Array<string> = [];

@@ -51,7 +51,12 @@ module.exports = class extends Generator {
       this.templatePath('_src/_index.spec.ts'),
       this.destinationPath('src/index.spec.ts')
     );
-
+    
+    this.fs.copy(
+      this.templatePath('_src/_polyfills.ts'),
+      this.destinationPath('src/polyfills.ts')
+    );
+    
     this.fs.copy(
       this.templatePath('_src/_sample-ele.ts'),
       this.destinationPath('src/sample-ele.ts')
@@ -105,11 +110,6 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath('_webpack/_base.config.js'),
       this.destinationPath('webpack/base.config.js')
-    );
-
-    this.fs.copy(
-      this.templatePath('_webpack/_custom-scss-loader.js'),
-      this.destinationPath('webpack/custom-scss-loader.js')
     );
 
     this.fs.copy(

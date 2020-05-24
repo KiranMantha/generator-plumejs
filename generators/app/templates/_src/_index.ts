@@ -1,7 +1,7 @@
 import { Component, html, TranslationService, Router, Route, Ref, useRef } from "plumejs";
 import locale_en from './i18n/en';
 import locale_fr from './i18n/fr';
-import globalStyles from './styles.scss';
+import globalstyles from './styles.scss';
 
 const routes:Array<Route> = [
 	{
@@ -24,7 +24,7 @@ Router.registerRoutes(routes);
 
 @Component({
   selector: "app-root",
-  styles: globalStyles,
+  styles: globalstyles,
   root: true
 })
 export class AppComponent {
