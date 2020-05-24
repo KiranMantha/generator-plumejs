@@ -36,9 +36,12 @@ module.exports = {
                 use: [{
                     loader: 'ts-loader',
                     options: {
-                        configFile: path.resolve(__dirname, "../tsconfig.json")
+                        configFile: path.resolve(__dirname, "../tsconfig.app.json")
                     }
                 }]
+            }, {
+                test: /\.(s*)css$/,
+                use: ['css-loader', 'sass-loader']
             }, {
                 test: /\.(png|svg|jpg|gif|woff|woff2|eot|ttf|otf)$/,
                 use: [{

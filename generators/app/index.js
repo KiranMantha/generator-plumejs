@@ -9,14 +9,15 @@ module.exports = class extends Generator {
   async prompting() {
     // Have Yeoman greet the user.
     this.log(chalk.yellow(
-      figlet.textSync('PlumeJS', { horizontalLayout: 'full' })
+      figlet.textSync('PlumeJS', {
+        horizontalLayout: 'full'
+      })
     ));
     this.log(
       yosay(`Welcome to the super-excellent ${chalk.red('plumejs')} generator!`)
-    );    
+    );
 
-    const prompts = [
-      {
+    const prompts = [{
         type: 'input',
         name: 'name',
         message: 'Your project name: ',
@@ -44,8 +45,13 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath('_src/_index.ts'),
       this.destinationPath('src/index.ts')
-    );  
-    
+    );
+
+    this.fs.copy(
+      this.templatePath('_src/_index.spec.ts'),
+      this.destinationPath('src/index.spec.ts')
+    );
+
     this.fs.copy(
       this.templatePath('_src/_sample-ele.ts'),
       this.destinationPath('src/sample-ele.ts')
@@ -97,11 +103,6 @@ module.exports = class extends Generator {
     );
 
     this.fs.copy(
-      this.templatePath('__tests__/_index.spec.ts'),
-      this.destinationPath('__tests__/index.spec.ts')
-    );
-
-    this.fs.copy(
       this.templatePath('_webpack/_base.config.js'),
       this.destinationPath('webpack/base.config.js')
     );
@@ -137,6 +138,16 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath('_tsconfig.json'),
       this.destinationPath('tsconfig.json')
+    );
+
+    this.fs.copy(
+      this.templatePath('_tsconfig.app.json'),
+      this.destinationPath('tsconfig.app.json')
+    );
+
+    this.fs.copy(
+      this.templatePath('_tsconfig.spec.json'),
+      this.destinationPath('tsconfig.spec.json')
     );
 
     this.fs.copy(

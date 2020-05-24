@@ -1,23 +1,27 @@
 module.exports = {
   testEnvironment: "node",
-  setupFiles: [
+  setupFilesAfterEnv: [
     '<rootDir>/config/jest.setup.js'
   ],
   displayName: 'PLUMEJS',
   preset: 'ts-jest',
+  roots: ['<rootDir>/src/'],
   collectCoverage: true,
   coverageDirectory: '<rootDir>/coverage',
-  collectCoverageFrom: [
-    "**/src/**/*.ts"
-  ],
-  testRegex: '(/__tests__/.*(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
-  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
-  transformIgnorePatterns: ['<rootDir>/node_modules/'],
+  testMatch: ['**/+(*.)+(spec).+(ts)'],
+  // testMatch: ['**/+(index.)+(spec).+(ts)'], // to test single file,
+  transform: {
+    '^.+\\.(ts|js|html)$': 'ts-jest',
+  },
+  moduleFileExtensions: ['ts', 'html', 'js', 'json'],
+  moduleNameMapper: {
+    "^.+.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "jest-transform-stub"
+  },
   globals: {
     'ts-jest': {
       diagnostics: false,
-      tsConfig: '<rootDir>/tsconfig.json'
+      tsConfig: '<rootDir>/tsconfig.spec.json',
+      stringifyContentPathRegex: '\\.html$'
     }
   }
-  //testNamePattern: "component"
 };

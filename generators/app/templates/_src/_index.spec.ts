@@ -1,5 +1,5 @@
 import { TestBed } from 'plumejs';
-import { AppComponent } from '../src/index';
+import { AppComponent } from './index';
 
 describe("Plumejs Component", () => {
   let appRoot:any;
