@@ -5,6 +5,7 @@ interface HTMLElement {
 }
 
 interface Window {
+	XMLHttpRequest: jest.Mock<any, any>;
 	returnMockHttpResponse: (response: any) => void;
 	MutationObserver: any;
 	WebKitMutationObserver: any;
@@ -20,14 +21,14 @@ interface String {
 
 interface fetch {
 	resetMocks: () => void;
-	mockResponseOnce: (mockResponse:string) => void;
+	mockResponseOnce: (mockResponse: string) => void;
 }
 
 declare module '*.scss' {
 	const content: any;
 	// using style-loader will result in an object which is incompatible
-	// hence use only css-loader and sass-loader which result in proper compiled css array 
-	// calling toString on compiled css array will result in proper css string 
+	// hence use only css-loader and sass-loader which result in proper compiled css array
+	// calling toString on compiled css array will result in proper css string
 	// which will feed to component decorator
-  	export default content.toString();
+	export default content.toString();
 }

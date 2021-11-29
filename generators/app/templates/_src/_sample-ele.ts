@@ -1,10 +1,17 @@
-import { Component, Input, html, Injectable, Router } from "plumejs";
+import {
+	Component,
+	html,
+	Injectable,
+	Renderer,
+	ComponentRef
+} from '@plumejs/core';
+import { Router } from '@plumejs/router';
 
 @Injectable()
 class SampleService {
 	constructor() {}
 	testMeth() {
-		console.log("testmethod in sample service");
+		console.log('testmethod in sample service');
 	}
 }
 
@@ -16,17 +23,18 @@ class TestService {
 	}
 
 	getUsers() {
-		return fetch("https://api.github.com/users?since=135");
+		return fetch('https://api.github.com/users?since=135');
 	}
 }
 
 @Component({
-	selector: "test-ele"
+	selector: 'test-ele'
 })
 class TestEle {
-	update: any;
-	@Input()
-	testprops: any = {};
+	readonly ObservedProperties = <const>['testprops'];
+	testprops: { name: string };
+
+	constructor(private renderer: Renderer) {}
 
 	render() {
 		return html`
@@ -42,36 +50,37 @@ class TestEle {
 	}
 
 	counts(e: any) {
-		this.testprops.oncount("testing from click");
+		this.renderer.emitEvent('count', 'testing from click');
 	}
 
 	change(val: string) {
-		this.testprops.oncount(val);
+		this.renderer.emitEvent('count', val);
 	}
 
 	mount() {
-		console.log("component loaded");
-		console.log("props: ", this.testprops);
+		console.log('component loaded');
+		console.log('props: ', this.testprops);
 	}
 
 	unmount() {
-		console.log("component unloaded");
+		console.log('component unloaded');
 	}
 }
 
 @Component({
-	selector: "sample-ele"
+	selector: 'sample-ele'
 })
 class SampleEle {
 	test: string;
 	outCount: Function;
-	update: any;
 	props: any;
-	constructor(private testSrvc: TestService) {
-		this.test = "sample 123";
-		this.outCount = this.count.bind(this);
+	inputField: HTMLInputElement;
+
+	private testEleRef: ComponentRef<TestEle>;
+
+	constructor(private testSrvc: TestService, private renderer: Renderer) {
+		this.test = 'sample 123';
 		this.props = {
-			oncount: this.outCount,
 			name: this.test
 		};
 	}
@@ -81,28 +90,51 @@ class SampleEle {
 			<div>
 				<h1>Sample two way data binding</h1>
 				testing web component1 ${this.test}
-				<test-ele testprops=${this.props}></test-ele>
+				<div>
+					<button
+						onclick=${() => {
+							this.updateProps();
+						}}
+					>
+						change props
+					</button>
+				</div>
+				<test-ele
+					ref="${(node) => {
+						this.testEleRef = node;
+					}}"
+					oncount="${(e: CustomEvent) => {
+						this.count(e.detail);
+					}}"
+				>
+				</test-ele>
 			</div>
 		`;
+	}
+
+	updateProps() {
+		this.testEleRef.setProps({ testprops: this.props });
 	}
 
 	count(val: string) {
 		this.test = val;
 		this.props.name = val;
-		this.update();
+		this.renderer.update();
+		this.testEleRef.setProps({ testprops: this.props });
 	}
 
 	beforeMount() {
-		console.log("before mounting...");
+		console.log('before mounting...');
 	}
 
 	mount() {
-		console.log("component loaded");
+		console.log('component loaded');
+		console.log(this.inputField);
 		this.testSrvc.testMeth();
+		this.testEleRef.setProps({ testprops: this.props });
 	}
 
 	unmount() {
-		console.log("component unloaded");
+		console.log('component unloaded');
 	}
 }
-

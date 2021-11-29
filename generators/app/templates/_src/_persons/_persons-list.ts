@@ -1,62 +1,85 @@
-import { Component, Input, html, Injectable, Router } from "plumejs";
-import personsListStyles from './persons-list.scss';
-
+import {
+	Component,
+	ComponentRef,
+	html,
+	Injectable,
+	render,
+	IHooks
+} from '@plumejs/core';
+import { Router } from '@plumejs/router';
+import { PersonDetails } from './person-details.component';
+import personListStyles from './persons-list.scss';
 
 @Injectable()
 class PersonService {
 	getPersons() {
-		return fetch("https://jsonplaceholder.typicode.com/users").then(res =>
+		return fetch('https://jsonplaceholder.typicode.com/users').then((res) =>
 			res.json()
 		);
 	}
 }
 
 @Component({
-	selector: "persons-list",
-	styles: personsListStyles
+	selector: 'persons-list',
+	styles: personListStyles
 })
 class PersonsList {
-	data: Array<string> = [];
 	persondetails: any = {};
 	update: any;
-	element: any;
-	constructor(private personSrvc: PersonService, private router:Router) {
+	usersListRef: HTMLElement;
+	personDetailsRef: ComponentRef<PersonDetails>;
+
+	constructor(private personSrvc: PersonService, private router: Router) {
 		console.log('current route ', this.router.getCurrentRoute());
 	}
+
 	mount() {
-		this.personSrvc.getPersons().then(data => {
-			this.data = data;
-			this.update(); // triggers change detection and update view
+		this.personSrvc.getPersons().then((data) => {
+			this.renderUsers(data);
 		});
 	}
 
 	alertName(user: any) {
 		this.persondetails = user;
-		this.update();
+		this.personDetailsRef.setProps({ userDetails: user });
+	}
+
+	private renderUsers(data: Array<any>) {
+		const nodes = data.map((user: any) => {
+			return html`
+				<li
+					class="pointer"
+					onclick=${() => {
+						this.alertName(user);
+					}}
+				>
+					${user.name}
+				</li>
+			`;
+		});
+		render(this.usersListRef, html`${nodes}`);
 	}
 
 	render() {
 		return html`
-		<h4>Sample service injection with http call and passing data to other component</h4>
-		<div innerHTML='${ '10300'.translate('fr') }'></div>		
-			<div>
-				<ul class="list-group">
-					${this.data.map(
-						(user: any) =>
-							html`
-								<li class="list-group-item"
-									onclick=${() => {
-										this.alertName(user);
-									}}
-								>
-									${user.name}
-								</li>
-							`
-					)}
-				</ul>
+			<h4>
+				Sample service injection with http call and passing data to other
+				component
+			</h4>
+			Current route data:
+			<code>${JSON.stringify(this.router.getCurrentRoute(), null, 2)}</code>
+			<div class="mt-20 mb-20 content">
+				<ul
+					ref="${(node) => {
+						this.usersListRef = node;
+					}}"
+					class="block-list is-small"
+				></ul>
 				<person-details
 					id="person-details"
-					userDetails=${this.persondetails}
+					ref="${(node) => {
+						this.personDetailsRef = node;
+					}}"
 				></person-details>
 			</div>
 		`;
@@ -64,37 +87,21 @@ class PersonsList {
 }
 
 @Component({
-	selector: "person-details"
+	selector: 'person-details'
 })
-class PersonDetails {
-	@Input()
-	userDetails: any = {};
+export class PersonDetails implements IHooks {
+	readonly ObservedProperties = <const>['userDetails'];
+	userDetails: { name: string; company: { name: string } };
 
 	render() {
-		console.log("selected: user", this.userDetails);
-		if (this.userDetails.name) {
+		if (this.userDetails && this.userDetails.name) {
 			return html`
+				<strong>Person Details</strong>
 				<div>Name: ${this.userDetails.name}</div>
-				<div>Company: ${this.userDetails.company.name}</div>						
-				<form>
-					<div class="form-group">
-						<label for="exampleInputEmail1">Email address</label>
-						<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-						<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-					</div>
-					<div class="form-group">
-						<label for="exampleInputPassword1">Password</label>
-						<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-					</div>
-					<div class="form-group form-check">
-						<input type="checkbox" class="form-check-input" id="exampleCheck1">
-						<label class="form-check-label" for="exampleCheck1">Check me out</label>
-					</div>
-					<button type="submit" class="btn btn-primary">Submit</button>
-				</form>
+				<div>Company: ${this.userDetails.company.name}</div>
 			`;
 		} else {
-			return html``;
+			return html`<div></div>`;
 		}
 	}
 }
