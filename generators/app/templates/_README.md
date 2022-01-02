@@ -4,4 +4,5 @@ For Documentation, please visit [here](https://github.com/kiranmantha/plumejs)
 
 ### Initial Steps
 1. To start application, run `npm start`
-2. To run unit tests, run `npm run test-local`
+2. To build application, run `npm run build`
+3. To run unit tests, run `npm run test`

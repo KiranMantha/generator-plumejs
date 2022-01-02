@@ -30,7 +30,7 @@ export class AppComponent {
 		{
 			path: '/persons/:id',
 			template: `<persons-list></persons-list>`,
-			templatePath: () => import('./persons/persons-list')
+			templatePath: () => import('./persons')
 		}
 	]
 

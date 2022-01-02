@@ -66,7 +66,17 @@ module.exports = class extends Generator {
 		);
 
 		this.fs.copy(
-			this.templatePath('_src/_persons/_persons-list.ts'),
+			this.templatePath('_src/_persons/_index.ts'),
+			this.destinationPath('src/persons/index.ts')
+		);
+
+		this.fs.copy(
+			this.templatePath('_src/_persons/_persons-list.component.ts'),
+			this.destinationPath('src/persons/persons-list.component.ts')
+		);
+
+		this.fs.copy(
+			this.templatePath('_src/_persons/_persons-details.component.ts'),
 			this.destinationPath('src/persons/persons-list.ts')
 		);
 
@@ -88,11 +98,6 @@ module.exports = class extends Generator {
 		this.fs.copy(
 			this.templatePath('_src/_i18n/_fr.ts'),
 			this.destinationPath('src/i18n/fr.ts')
-		);
-
-		this.fs.copy(
-			this.templatePath('_@types/_browser-or-node/_index.d.ts'),
-			this.destinationPath('@types/browser-or-node/index.d.ts')
 		);
 
 		this.fs.copy(
@@ -140,16 +145,6 @@ module.exports = class extends Generator {
 		);
 
 		this.fs.copy(
-			this.templatePath('_tsconfig.app.json'),
-			this.destinationPath('tsconfig.app.json')
-		);
-
-		this.fs.copy(
-			this.templatePath('_tsconfig.spec.json'),
-			this.destinationPath('tsconfig.spec.json')
-		);
-
-		this.fs.copy(
 			this.templatePath('_README.md'),
 			this.destinationPath('README.md')
 		);
@@ -166,7 +161,7 @@ module.exports = class extends Generator {
 	}
 
 	install() {
-		this.installDependencies({
+		this.install({
 			bower: false,
 			npm: true
 		});

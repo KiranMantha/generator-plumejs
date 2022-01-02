@@ -5,7 +5,7 @@ const path = require('path');
 module.exports = merge(baseConfig, {
 	mode: 'development',
 	devServer: {
-		static: path.join(__dirname, '../dist'),
+		static: path.join(__dirname, '../docs'),
 		compress: true,
 		hot: true,
 		port: 3001,

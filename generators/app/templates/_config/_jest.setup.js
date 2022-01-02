@@ -5,7 +5,9 @@
  */
 const { Window } = require('happy-dom');
 const window = new Window();
-const _CSSStyleSheet = jest.fn();
+const _CSSStyleSheet = jest.fn().mockImplementation({
+	replace: jest.fn()
+});
 const _fetch = require('jest-fetch-mock');
 
 window.CSSStyleSheet = _CSSStyleSheet;
