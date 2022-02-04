@@ -5,14 +5,12 @@ describe('@plumejs/core Component', () => {
 	let appRoot: Fixture<AppComponent>;
 
 	beforeAll(async () => {
-		//appRoot = await TestBed.MockComponent('app-root');
 		appRoot = await TestBed.MockComponent(AppComponent);
 	});
 
-	it('translation should return "Hello World"', () => {
-		//expect('username.greet'.translate({name: 'Hello World'})).toBe("my name is Hello World");
+	it('translation should return "Welcome to PlumeJS"', () => {
 		const h1 = appRoot.element.querySelector('h1');
-		expect(h1.innerHTML).toBe('Hello world');
+		expect(h1.innerHTML).toBe('Welcome to PlumeJS');
 	});
 
 	afterAll(() => {

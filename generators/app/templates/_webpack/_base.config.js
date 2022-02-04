@@ -4,11 +4,10 @@ const appconstants = {
 	publicPath: '/',
 	root: '../',
 	sourceDir: '../src',
-	buildDir: '../docs',
+	buildDir: '../dist',
 	node_modules: '../node_modules'
 };
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
 	devtool: 'eval-cheap-source-map',
@@ -48,7 +47,6 @@ module.exports = {
 					{
 						loader: 'sass-loader',
 						options: {
-							// Prefer `dart-sass`
 							implementation: require('sass'),
 							sassOptions: {
 								fiber: false
@@ -85,7 +83,7 @@ module.exports = {
 	},
 	plugins: [
 		new HtmlWebPackPlugin({
-			template: './src/index.html',
+			template: './index.html',
 			filename: 'index.html',
 			inject: 'head',
 			minify: {
@@ -98,20 +96,6 @@ module.exports = {
 	],
 	optimization: {
 		minimize: true,
-		minimizer: [
-			new TerserPlugin({
-				terserOptions: {
-					parse: {
-						ecma: 8
-					},
-					compress: {
-						ecma: 5
-					},
-					sourceMap: false,
-					keep_classnames: true
-				}
-			})
-		],
 		runtimeChunk: {
 			name: 'runtime'
 		},

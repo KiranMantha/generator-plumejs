@@ -1,20 +1,19 @@
 {
-  "compilerOptions": {
-    "allowJs": true,
-    "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
-    "target": "esnext",
-    "moduleResolution": "node",
-    "module": "esnext",
-    "lib": ["DOM", "ESNext"],
-    "importHelpers": true,
-    "noEmitOnError": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "sourceMap": true,
-    "skipLibCheck": true,
-    "typeRoots": ["@types", "node_modules/@types"]
-  }
+	"compilerOptions": {
+		"allowJs": true,
+		"baseUrl": "./",
+		"outDir": "./dist/out-tsc",
+		"target": "esnext",
+		"moduleResolution": "node",
+		"module": "esnext",
+		"lib": ["DOM", "ESNext"],
+		"importHelpers": true,
+		"noEmitOnError": true,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"experimentalDecorators": true,
+		"sourceMap": true,
+		"skipLibCheck": true,
+		"typeRoots": ["@types", "node_modules/@types", "vitest/globals"]
+	}
 }

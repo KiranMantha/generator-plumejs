@@ -16,7 +16,7 @@ module.exports = class extends Generator {
 			)
 		);
 		this.log(
-			yosay(`Welcome to the super-excellent ${chalk.red('plumejs')} generator!`)
+			yosay(`Welcome to the super-excellent ${chalk.red('PlumeJS')} generator!`)
 		);
 
 		const prompts = [
@@ -31,6 +31,21 @@ module.exports = class extends Generator {
 				name: 'description',
 				message: 'Your project description: ',
 				default: ''
+			},
+			{
+				type: 'input',
+				name: 'bundler',
+				message: 'Select a bundler',
+				choices: [
+					{
+						name: 'Vite',
+						value: 'V'
+					},
+					{
+						name: 'Webpack',
+						value: 'W'
+					}
+				]
 			}
 		];
 
@@ -40,9 +55,22 @@ module.exports = class extends Generator {
 	writing() {
 		mkdirp.sync(this.answers.name);
 		this.destinationRoot(this.answers.name);
+
 		this.fs.copy(
-			this.templatePath('_src/_index.html'),
-			this.destinationPath('src/index.html')
+			this.templatePath('_@types/_typings.d.ts'),
+			this.destinationPath('@types/typings.d.ts')
+		);
+
+		this.fs.copy(
+			this.templatePath('_config/_jest.setup.js'),
+			this.destinationPath('config/jest.setup.js')
+		);
+
+		this.fs.copy(
+			this.answers.bundler === 'W'
+				? this.templatePath('_index-webpack.html')
+				: this.templatePath('_index-vite.html'),
+			this.destinationPath('index.html')
 		);
 
 		this.fs.copy(
@@ -61,72 +89,46 @@ module.exports = class extends Generator {
 		);
 
 		this.fs.copy(
-			this.templatePath('_src/_sample-ele.ts'),
-			this.destinationPath('src/sample-ele.ts')
+			this.templatePath('_src/_styles/_styles.scss'),
+			this.destinationPath('src/styles/styles.scss')
 		);
 
-		this.fs.copy(
-			this.templatePath('_src/_persons/_index.ts'),
-			this.destinationPath('src/persons/index.ts')
-		);
+		if (this.answers.bundler === 'W') {
+			this.fs.copy(
+				this.templatePath('_src/_images/logo.jpg'),
+				this.destinationPath('src/images/logo.jpg')
+			);
 
-		this.fs.copy(
-			this.templatePath('_src/_persons/_persons-list.component.ts'),
-			this.destinationPath('src/persons/persons-list.component.ts')
-		);
+			this.fs.copy(
+				this.templatePath('_webpack/_base.config.js'),
+				this.destinationPath('webpack/base.config.js')
+			);
 
-		this.fs.copy(
-			this.templatePath('_src/_persons/_persons-details.component.ts'),
-			this.destinationPath('src/persons/persons-list.ts')
-		);
+			this.fs.copy(
+				this.templatePath('_webpack/_build.config.js'),
+				this.destinationPath('webpack/build.config.js')
+			);
 
-		this.fs.copy(
-			this.templatePath('_src/_persons/_persons-list.scss'),
-			this.destinationPath('src/persons/persons-list.scss')
-		);
+			this.fs.copy(
+				this.templatePath('_webpack/_server.config.js'),
+				this.destinationPath('webpack/server.config.js')
+			);
+		} else {
+			this.fs.copy(
+				this.templatePath('_public/logo.jpg'),
+				this.destinationPath('public/logo.jpg')
+			);
 
-		this.fs.copy(
-			this.templatePath('_src/_styles.scss'),
-			this.destinationPath('src/styles.scss')
-		);
-
-		this.fs.copy(
-			this.templatePath('_src/_i18n/_en.ts'),
-			this.destinationPath('src/i18n/en.ts')
-		);
-
-		this.fs.copy(
-			this.templatePath('_src/_i18n/_fr.ts'),
-			this.destinationPath('src/i18n/fr.ts')
-		);
-
-		this.fs.copy(
-			this.templatePath('_@types/_vanilla-i18n/_index.d.ts'),
-			this.destinationPath('@types/vanilla-i18n/index.d.ts')
-		);
-
-		this.fs.copy(
-			this.templatePath('_@types/_typings.d.ts'),
-			this.destinationPath('@types/typings.d.ts')
-		);
-
-		this.fs.copy(
-			this.templatePath('_webpack/_base.config.js'),
-			this.destinationPath('webpack/base.config.js')
-		);
-
-		this.fs.copy(
-			this.templatePath('_webpack/_build.config.js'),
-			this.destinationPath('webpack/build.config.js')
-		);
-
-		this.fs.copy(
-			this.templatePath('_webpack/_server.config.js'),
-			this.destinationPath('webpack/server.config.js')
-		);
+			this.fs.copy(
+				this.templatePath('_vite.config.js'),
+				this.destinationPath('vite.config.js')
+			);
+		}
 
 		this.fs.copyTpl(
-			this.templatePath('_package.json'),
+			this.answers.bundler === 'W'
+				? this.templatePath('_package-webpack.json')
+				: this.templatePath('_package-vite.json'),
 			this.destinationPath('package.json'),
 			{
 				name: this.answers.name,
@@ -137,6 +139,16 @@ module.exports = class extends Generator {
 		this.fs.copy(
 			this.templatePath('_gitignore'),
 			this.destinationPath('.gitignore')
+		);
+
+		this.fs.copy(
+			this.templatePath('_eslintrc.json'),
+			this.destinationPath('.eslintrc.json')
+		);
+
+		this.fs.copy(
+			this.templatePath('_prettierrc.json'),
+			this.destinationPath('.prettierrc.json')
 		);
 
 		this.fs.copy(
@@ -152,11 +164,6 @@ module.exports = class extends Generator {
 		this.fs.copy(
 			this.templatePath('_jest.config.js'),
 			this.destinationPath('jest.config.js')
-		);
-
-		this.fs.copy(
-			this.templatePath('_config/_jest.setup.js'),
-			this.destinationPath('config/jest.setup.js')
 		);
 	}
 
