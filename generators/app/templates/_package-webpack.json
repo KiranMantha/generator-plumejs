@@ -1,5 +1,5 @@
 {
-	"name": "<%= name%",
+	"name": "<%= name%>",
 	"version": "1.0.0",
 	"description": "<%= description%>",
 	"main": "index.js",
@@ -21,6 +21,7 @@
 		"@happy-dom/jest-environment": "^2.31.1",
 		"@types/jest": "^27.4.0",
 		"@typescript-eslint/eslint-plugin": "^5.10.2",
+		"construct-style-sheets-polyfill": "^3.0.4",
 		"copy-webpack-plugin": "^10.2.4",
 		"css-loader": "^6.6.0",
 		"eslint": "^8.8.0",

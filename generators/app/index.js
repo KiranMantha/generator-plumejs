@@ -33,9 +33,9 @@ module.exports = class extends Generator {
 				default: ''
 			},
 			{
-				type: 'input',
+				type: 'list',
 				name: 'bundler',
-				message: 'Select a bundler',
+				message: 'Select a bundler for your project: ',
 				choices: [
 					{
 						name: 'Vite',
@@ -115,8 +115,8 @@ module.exports = class extends Generator {
 			);
 		} else {
 			this.fs.copy(
-				this.templatePath('_public/logo.jpg'),
-				this.destinationPath('public/logo.jpg')
+				this.templatePath('_public/_images/logo.jpg'),
+				this.destinationPath('public/images/logo.jpg')
 			);
 
 			this.fs.copy(
@@ -168,9 +168,12 @@ module.exports = class extends Generator {
 	}
 
 	install() {
-		this.install({
-			bower: false,
-			npm: true
-		});
+		this.npmInstall();
+	}
+
+	end() {
+		this.log(
+			`Successfully created project ${this.answers.name}. Happy coding..`
+		);
 	}
 };
