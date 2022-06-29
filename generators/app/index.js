@@ -84,11 +84,6 @@ module.exports = class extends Generator {
 		);
 
 		this.fs.copy(
-			this.templatePath('_src/_polyfills.ts'),
-			this.destinationPath('src/polyfills.ts')
-		);
-
-		this.fs.copy(
 			this.templatePath('_src/_styles/_styles.scss'),
 			this.destinationPath('src/styles/styles.scss')
 		);
