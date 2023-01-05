@@ -62,11 +62,6 @@ module.exports = class extends Generator {
 		);
 
 		this.fs.copy(
-			this.templatePath('_config/_jest.setup.js'),
-			this.destinationPath('config/jest.setup.js')
-		);
-
-		this.fs.copy(
 			this.answers.bundler === 'W'
 				? this.templatePath('_index-webpack.html')
 				: this.templatePath('_index-vite.html'),
@@ -107,6 +102,16 @@ module.exports = class extends Generator {
 			this.fs.copy(
 				this.templatePath('_webpack/_server.config.js'),
 				this.destinationPath('webpack/server.config.js')
+			);
+
+			this.fs.copy(
+				this.templatePath('_config/_jest.setup.js'),
+				this.destinationPath('config/jest.setup.js')
+			);
+
+			this.fs.copy(
+				this.templatePath('_jest.config.js'),
+				this.destinationPath('jest.config.js')
 			);
 		} else {
 			this.fs.copy(
@@ -154,11 +159,6 @@ module.exports = class extends Generator {
 		this.fs.copy(
 			this.templatePath('_README.md'),
 			this.destinationPath('README.md')
-		);
-
-		this.fs.copy(
-			this.templatePath('_jest.config.js'),
-			this.destinationPath('jest.config.js')
 		);
 	}
 

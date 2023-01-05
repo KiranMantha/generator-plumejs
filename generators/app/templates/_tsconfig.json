@@ -14,6 +14,7 @@
 		"experimentalDecorators": true,
 		"sourceMap": true,
 		"skipLibCheck": true,
-		"typeRoots": ["@types", "node_modules/@types", "vitest/globals"]
+		"types": ["vitest/globals"],
+		"typeRoots": ["@types", "node_modules/@types"]
 	}
 }

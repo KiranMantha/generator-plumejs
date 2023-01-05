@@ -1,5 +1,5 @@
 import { Component, html } from '@plumejs/core';
-import globalstyles from './styles/styles.scss';
+import globalstyles from './styles/styles.scss?inline';
 
 @Component({
 	selector: 'app-root',
