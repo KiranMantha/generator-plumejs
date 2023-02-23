@@ -1,11 +1,16 @@
 'use strict';
-const Generator = require('yeoman-generator');
-const chalk = require('chalk');
-const yosay = require('yosay');
-const mkdirp = require('mkdirp');
-const figlet = require('figlet');
 
-module.exports = class extends Generator {
+import chalk from 'chalk';
+import Generator from 'yeoman-generator';
+import yosay from 'yosay';
+import mkdirp from 'mkdirp';
+import figlet from 'figlet';
+
+class PlumeJSGenerator extends Generator {
+	constructor(args, options) {
+		super(args, options);
+	}
+
 	async prompting() {
 		// Have Yeoman greet the user.
 		this.log(
@@ -50,6 +55,7 @@ module.exports = class extends Generator {
 		];
 
 		this.answers = await this.prompt(prompts);
+		this.env.cwd = this.answers.name;
 	}
 
 	writing() {
@@ -162,13 +168,11 @@ module.exports = class extends Generator {
 		);
 	}
 
-	install() {
-		this.npmInstall();
-	}
-
 	end() {
 		this.log(
 			`Successfully created project ${this.answers.name}. Happy coding..`
 		);
 	}
-};
+}
+
+export default PlumeJSGenerator;
