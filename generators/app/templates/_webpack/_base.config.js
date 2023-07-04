@@ -25,6 +25,12 @@ module.exports = {
 	module: {
 		rules: [
 			{
+				test: /\.m?js$/,
+				resolve: {
+					fullySpecified: false
+				}
+			},
+			{
 				test: /\.html$/,
 				use: ['html-loader']
 			},
@@ -35,7 +41,7 @@ module.exports = {
 					{
 						loader: 'ts-loader',
 						options: {
-							configFile: path.resolve(__dirname, '../tsconfig.json')
+							configFile: path.resolve(__dirname, '../tsconfig.app.json')
 						}
 					}
 				]

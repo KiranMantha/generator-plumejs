@@ -15,6 +15,6 @@
 		"sourceMap": true,
 		"skipLibCheck": true,
 		"types": ["vitest/globals"],
-		"typeRoots": ["@types", "node_modules/@types"]
+		"typeRoots": ["@types", "node_modules"]
 	}
 }

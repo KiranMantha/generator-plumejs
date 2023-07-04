@@ -12,7 +12,6 @@ class PlumeJSGenerator extends Generator {
 	}
 
 	async prompting() {
-		// Have Yeoman greet the user.
 		this.log(
 			chalk.yellow(
 				figlet.textSync('PlumeJS', {
@@ -111,13 +110,13 @@ class PlumeJSGenerator extends Generator {
 			);
 
 			this.fs.copy(
-				this.templatePath('_config/_jest.setup.js'),
-				this.destinationPath('config/jest.setup.js')
+				this.templatePath('_tsconfig.app.json'),
+				this.destinationPath('tsconfig.app.json')
 			);
 
 			this.fs.copy(
-				this.templatePath('_jest.config.js'),
-				this.destinationPath('jest.config.js')
+				this.templatePath('_vitest.config.js'),
+				this.destinationPath('vitest.config.js')
 			);
 		} else {
 			this.fs.copy(
@@ -140,6 +139,11 @@ class PlumeJSGenerator extends Generator {
 				name: this.answers.name,
 				description: this.answers.description
 			}
+		);
+
+		this.fs.copy(
+			this.templatePath('_vitest.setup.js'),
+			this.destinationPath('vitest.setup.js')
 		);
 
 		this.fs.copy(

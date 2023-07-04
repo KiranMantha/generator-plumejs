@@ -1,8 +1,8 @@
 
-### Plumejs repo
-For Documentation, please visit [here](https://github.com/kiranmantha/plumejs)
+## Plumejs Repo
+For Documentation, please visit [here](https://github.com/KiranMantha/plumejs/wiki)
 
-### Initial Steps
+## Next Steps
 1. To start application, run `npm start`
 2. To build application, run `npm run build`
 3. To run unit tests, run `npm run test`

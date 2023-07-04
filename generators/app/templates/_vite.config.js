@@ -23,13 +23,14 @@ export default defineConfig({
   },
   test: {
     globals: true,
-    environment: 'happy-dom',
+    environment: 'jsdom',
+    setupFiles: ['vitest.setup.js'],
     deps: {
-      inline: true
+      inline: [/^(?!.*vitest).*$/]
     },
     coverage: {
-      reporter: ['text', 'json', 'html'], 
-      cleanOnRerun: true, 
+      reporter: ['text', 'json', 'html'],
+      cleanOnRerun: true,
       reportsDirectory: 'coverage'
     }
   }
