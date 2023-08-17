@@ -27,30 +27,49 @@ class PlumeJSGenerator extends Generator {
 			{
 				type: 'input',
 				name: 'name',
-				message: 'Your project name: ',
+				message: 'What\'s your project name? ',
 				default: this.appname
 			},
 			{
 				type: 'input',
 				name: 'description',
-				message: 'Your project description: ',
+				message: 'What\'s your project description? ',
 				default: ''
 			},
 			{
 				type: 'list',
 				name: 'bundler',
-				message: 'Select a bundler for your project: ',
+				message: 'Which bundler to use? ',
 				choices: [
 					{
 						name: 'Vite',
-						value: 'V'
+						value: 'VITE'
 					},
 					{
 						name: 'Webpack',
-						value: 'W'
+						value: 'WEBPACK'
 					}
 				]
-			}
+			},
+			{
+				type: 'list',
+				name: 'pkgManager',
+				message: 'Which package manager to use? ',
+				choices: [
+					{
+						name: 'Yarn',
+						value: 'yarn'
+					},
+					{
+						name: 'npm',
+						value: 'npm'
+					},
+					{
+						name: 'pnpm',
+						value: 'pnpm'
+					}
+				]
+			},
 		];
 
 		this.answers = await this.prompt(prompts);
@@ -67,7 +86,7 @@ class PlumeJSGenerator extends Generator {
 		);
 
 		this.fs.copy(
-			this.answers.bundler === 'W'
+			this.answers.bundler === 'WEBPACK'
 				? this.templatePath('_index-webpack.html')
 				: this.templatePath('_index-vite.html'),
 			this.destinationPath('index.html')
@@ -88,7 +107,7 @@ class PlumeJSGenerator extends Generator {
 			this.destinationPath('src/styles/styles.scss')
 		);
 
-		if (this.answers.bundler === 'W') {
+		if (this.answers.bundler === 'WEBPACK') {
 			this.fs.copy(
 				this.templatePath('_src/_images/logo.jpg'),
 				this.destinationPath('src/images/logo.jpg')
@@ -131,7 +150,7 @@ class PlumeJSGenerator extends Generator {
 		}
 
 		this.fs.copyTpl(
-			this.answers.bundler === 'W'
+			this.answers.bundler === 'WEBPACK'
 				? this.templatePath('_package-webpack.json')
 				: this.templatePath('_package-vite.json'),
 			this.destinationPath('package.json'),
@@ -172,10 +191,31 @@ class PlumeJSGenerator extends Generator {
 		);
 	}
 
-	end() {
+	install() {
+		this.env.options.nodePackageManager = this.answers.pkgManager;
+	}
+
+	async end() {
 		this.log(
 			`Successfully created project ${this.answers.name}. Happy coding..`
 		);
+
+		const answer = await this.prompt({
+			type: "list",
+			name: "openWith",
+			message: "Do you want to open the new folder with Visual Studio Code?",
+			choices: [{
+				name: "Yes",
+				value: "code"
+			},{
+				name: "skip",
+				value: "skip"
+			}]
+		});
+
+		if (answer && answer.openWith && answer.openWith !== 'skip') {
+			this.spawnCommand(answer.openWith, [this.destinationPath()]);
+		}
 	}
 }
 
