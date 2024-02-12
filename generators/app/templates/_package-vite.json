@@ -16,8 +16,8 @@
 	"license": "ISC",
 	"dependencies": {
 		"@picocss/pico": "^1.4.4",
-		"@plumejs/core": "^4.1.0",
-		"@plumejs/testing": "^4.1.0"
+		"@plumejs/core": "^4.1.1",
+		"@plumejs/testing": "^4.1.1"
 	},
 	"devDependencies": {
 		"@typescript-eslint/eslint-plugin": "^6.21.0",
