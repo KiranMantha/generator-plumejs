@@ -3,7 +3,7 @@
 import chalk from 'chalk';
 import Generator from 'yeoman-generator';
 import yosay from 'yosay';
-import mkdirp from 'mkdirp';
+import { mkdirp } from 'mkdirp';
 import figlet from 'figlet';
 
 class PlumeJSGenerator extends Generator {
