@@ -14,7 +14,7 @@ class TestElement {
 
 @Component({
   selector: 'app-root',
-  styles: import('./styles/styles.scss'),
+  styles: import('./styles/styles.scss?inline'),
   root: true
 })
 export class AppComponent {
