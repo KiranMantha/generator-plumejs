@@ -27,13 +27,13 @@ class PlumeJSGenerator extends Generator {
 			{
 				type: 'input',
 				name: 'name',
-				message: 'What\'s your project name? ',
+				message: "What's your project name? ",
 				default: this.appname
 			},
 			{
 				type: 'input',
 				name: 'description',
-				message: 'What\'s your project description? ',
+				message: "What's your project description? ",
 				default: ''
 			},
 			{
@@ -69,7 +69,7 @@ class PlumeJSGenerator extends Generator {
 						value: 'pnpm'
 					}
 				]
-			},
+			}
 		];
 
 		this.answers = await this.prompt(prompts);
@@ -186,6 +186,30 @@ class PlumeJSGenerator extends Generator {
 		);
 
 		this.fs.copy(
+			this.templatePath('_dockerignore'),
+			this.destinationPath('.dockerignore')
+		);
+
+		this.fs.copy(
+			this.templatePath('_Dockerfile'),
+			this.destinationPath('Dockerfile')
+		);
+
+		this.fs.copy(
+			this.templatePath('_package-docker.json'),
+			this.destinationPath('package-docker.json')
+		);
+
+		this.fs.copyTpl(
+			this.templatePath('_package-docker.json'),
+			this.destinationPath('package-docker.json'),
+			{
+				name: this.answers.name,
+				description: this.answers.description
+			}
+		);
+
+		this.fs.copy(
 			this.templatePath('_README.md'),
 			this.destinationPath('README.md')
 		);
@@ -201,16 +225,19 @@ class PlumeJSGenerator extends Generator {
 		);
 
 		const answer = await this.prompt({
-			type: "list",
-			name: "openWith",
-			message: "Do you want to open the new folder with Visual Studio Code?",
-			choices: [{
-				name: "Yes",
-				value: "code"
-			},{
-				name: "skip",
-				value: "skip"
-			}]
+			type: 'list',
+			name: 'openWith',
+			message: 'Do you want to open the new folder with Visual Studio Code?',
+			choices: [
+				{
+					name: 'Yes',
+					value: 'code'
+				},
+				{
+					name: 'skip',
+					value: 'skip'
+				}
+			]
 		});
 
 		if (answer && answer.openWith && answer.openWith !== 'skip') {
