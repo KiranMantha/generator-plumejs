@@ -196,18 +196,10 @@ class PlumeJSGenerator extends Generator {
 		);
 
 		this.fs.copy(
-			this.templatePath('_package-docker.json'),
-			this.destinationPath('package-docker.json')
+			this.templatePath('_server.js'),
+			this.destinationPath('server.js')
 		);
 
-		this.fs.copyTpl(
-			this.templatePath('_package-docker.json'),
-			this.destinationPath('package-docker.json'),
-			{
-				name: this.answers.name,
-				description: this.answers.description
-			}
-		);
 
 		this.fs.copy(
 			this.templatePath('_README.md'),
