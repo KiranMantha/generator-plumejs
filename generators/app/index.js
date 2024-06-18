@@ -53,6 +53,21 @@ class PlumeJSGenerator extends Generator {
 			},
 			{
 				type: 'list',
+				name: 'dockerSetup',
+				message: 'Do you want to setup Dockerfile?',
+				choices: [
+					{
+						name: 'Yes',
+						value: 'YES'
+					},
+					{
+						name: 'skip',
+						value: 'SKIP'
+					}
+				]
+			},
+			{
+				type: 'list',
 				name: 'pkgManager',
 				message: 'Which package manager to use? ',
 				choices: [
@@ -184,22 +199,22 @@ class PlumeJSGenerator extends Generator {
 			this.templatePath('_tsconfig.json'),
 			this.destinationPath('tsconfig.json')
 		);
+		if (this.answers.dockerSetup === 'YES') {
+			this.fs.copy(
+				this.templatePath('_dockerignore'),
+				this.destinationPath('.dockerignore')
+			);
 
-		this.fs.copy(
-			this.templatePath('_dockerignore'),
-			this.destinationPath('.dockerignore')
-		);
+			this.fs.copy(
+				this.templatePath('_Dockerfile'),
+				this.destinationPath('Dockerfile')
+			);
 
-		this.fs.copy(
-			this.templatePath('_Dockerfile'),
-			this.destinationPath('Dockerfile')
-		);
-
-		this.fs.copy(
-			this.templatePath('_server.js'),
-			this.destinationPath('server.js')
-		);
-
+			this.fs.copy(
+				this.templatePath('_server.js'),
+				this.destinationPath('server.js')
+			);
+		}
 
 		this.fs.copy(
 			this.templatePath('_README.md'),
