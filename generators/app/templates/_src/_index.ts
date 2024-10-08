@@ -1,4 +1,4 @@
-import { Component, html } from '@plumejs/core';
+import { Component, html, signal } from '@plumejs/core';
 
 @Component({
   selector: 'test-ele'
@@ -18,11 +18,11 @@ export class TestElement {
   root: true
 })
 export class AppComponent {
-  title = '';
+  title = signal('');
 
   mount() {
     setTimeout(() => {
-      this.title = 'Hello world';
+      this.title.set('Hello world');
     }, 2000);
   }
 
@@ -35,7 +35,7 @@ export class AppComponent {
           Please check
           <a href="https://github.com/KiranMantha/plumejs">here</a> for documentation
         </p>
-        ${this.title ? `<div data-testid='content'>${this.title}</div>` : `<div data-testid='loader'>Loading</div>`}
+        ${this.title() ? `<div data-testid='content'>${this.title()}</div>` : `<div data-testid='loader'>Loading</div>`}
         <test-ele></test-ele>
       </main>
     `;
