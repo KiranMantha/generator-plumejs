@@ -3,7 +3,7 @@ import { Component, html } from '@plumejs/core';
 @Component({
   selector: 'test-ele'
 })
-class TestElement {
+export class TestElement {
   render() {
     return html`<div data-testid="test-ele">
       <p>i'm child element</p>

@@ -186,8 +186,8 @@ class PlumeJSGenerator extends Generator {
 		);
 
 		this.fs.copy(
-			this.templatePath('_eslintrc.json'),
-			this.destinationPath('.eslintrc.json')
+			this.templatePath('_eslint.config.mjs'),
+			this.destinationPath('eslint.config.mjs')
 		);
 
 		this.fs.copy(
