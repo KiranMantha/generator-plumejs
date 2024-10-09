@@ -152,6 +152,11 @@ class PlumeJSGenerator extends Generator {
 				this.templatePath('_vitest.config.js'),
 				this.destinationPath('vitest.config.js')
 			);
+
+			this.fs.copy(
+				this.templatePath('_tsconfig-webpack.json'),
+				this.destinationPath('tsconfig.json')
+			);
 		} else {
 			this.fs.copy(
 				this.templatePath('_public/_images/logo.jpg'),
@@ -161,6 +166,10 @@ class PlumeJSGenerator extends Generator {
 			this.fs.copy(
 				this.templatePath('_vite.config.js'),
 				this.destinationPath('vite.config.js')
+			);
+			this.fs.copy(
+				this.templatePath('_tsconfig-vite.json'),
+				this.destinationPath('tsconfig.json')
 			);
 		}
 
@@ -195,10 +204,6 @@ class PlumeJSGenerator extends Generator {
 			this.destinationPath('.prettierrc.json')
 		);
 
-		this.fs.copy(
-			this.templatePath('_tsconfig.json'),
-			this.destinationPath('tsconfig.json')
-		);
 		if (this.answers.dockerSetup === 'YES') {
 			this.fs.copy(
 				this.templatePath('_dockerignore'),
