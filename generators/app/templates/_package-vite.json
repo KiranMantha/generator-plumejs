@@ -17,7 +17,7 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-	  "@plumejs/core": "^4.2.0",
+	  "@plumejs/core": "^4.2.1",
 	  "@plumejs/testing": "^4.1.3"
 	},
 	"devDependencies": {
