@@ -118,8 +118,18 @@ class PlumeJSGenerator extends Generator {
 		);
 
 		this.fs.copy(
+			this.templatePath('_src/_env.ts'),
+			this.destinationPath('src/env.ts')
+		);
+
+		this.fs.copy(
 			this.templatePath('_src/_styles/_styles.scss'),
 			this.destinationPath('src/styles/styles.scss')
+		);
+
+		this.fs.copy(
+			this.templatePath('_.env'),
+			this.destinationPath('.env')
 		);
 
 		if (this.answers.bundler === 'WEBPACK') {

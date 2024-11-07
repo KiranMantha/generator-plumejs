@@ -8,6 +8,8 @@ const appconstants = {
 	node_modules: '../node_modules'
 };
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const webpack = require('webpack');
+const envVariables = require('dotenv').config().parsed || {};
 
 module.exports = {
 	devtool: 'eval-cheap-source-map',
@@ -85,6 +87,7 @@ module.exports = {
 		]
 	},
 	plugins: [
+		new webpack.DefinePlugin({ process: { env: JSON.stringify(envVariables) } }),
 		new HtmlWebPackPlugin({
 			template: './index.html',
 			filename: 'index.html',
